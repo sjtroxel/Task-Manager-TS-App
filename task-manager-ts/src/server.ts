@@ -1,9 +1,14 @@
 import express from 'express';
+import 'dotenv/config';
+import taskRouter from './routes/taskRoutes.js'
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5005;
 
-// A simple route to test
+app.use(express.json());
+
+app.use('/api/tasks', taskRouter);
+
 app.get('/', (req, res) => {
   res.send('Task Manager API is running with TypeScript!');
 });
