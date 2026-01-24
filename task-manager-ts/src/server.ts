@@ -1,6 +1,9 @@
 import express from 'express';
 import 'dotenv/config';
+import connectDB from './config/db.js';
 import taskRouter from './routes/taskRoutes.js'
+
+connectDB();
 
 const app = express();
 const PORT = process.env.PORT || 5005;
