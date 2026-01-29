@@ -3,9 +3,10 @@ import Task from '../models/taskModel.js'
 
 // @desc    get all tasks
 // @route   GET /api/tasks
-export const getTasks = async (req: Request, res: Response) => {
+export const getTasks = async (req: any, res: Response) => {
   try {
-    const tasks = await Task.find();  
+    // only find tasks that belong to this specific user
+    const tasks = await Task.find({ user: req.user._id });  
     res.status(200).json(tasks);
   } catch (error) {
     res.status(500).json({message: 'Server Error!' });
@@ -14,13 +15,14 @@ export const getTasks = async (req: Request, res: Response) => {
 
 // @desc    create a task
 // @route   POST /api/tasks
-export const createTask = async (req: Request, res: Response) => {
+export const createTask = async (req: any, res: Response) => {
   try {
     const { title, description } = req.body;
 
     const newTask = await Task.create({
       title,
       description,
+      user: req.user._id,   //attach the logged-in user's ID here!
     });
 
     res.status(201).json(newTask);

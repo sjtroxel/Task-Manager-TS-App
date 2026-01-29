@@ -2,6 +2,7 @@ import mongoose, { Schema, Document } from 'mongoose';
 
 // 1. this is for TypeScript - it defines what a Task looks like in our code
 export interface ITask extends Document {
+  user: mongoose.Types.ObjectId;
   title: string;
   description: string;
   isCompleted: boolean;
@@ -10,6 +11,11 @@ export interface ITask extends Document {
 // 2. this is for Mongoose - it defines how it's stored in MongoDB
 const taskSchema: Schema = new Schema(
   {
+    user: {           // this new field links the task to a specific User's ID
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'User',    // this tells Mongoose which model the ID belongs to
+    },
     title: {
       type: String,
       required: [true, 'Please add a title!'],
