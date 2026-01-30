@@ -3,11 +3,14 @@ import 'dotenv/config';
 import connectDB from './config/db.js';
 import taskRouter from './routes/taskRoutes.js';
 import userRouter from './routes/userRoutes.js';
+import cors from 'cors';
 
 connectDB();
 
 const app = express();
 const PORT = process.env.PORT || 5005;
+
+app.use(cors());
 
 app.use(express.json());
 
