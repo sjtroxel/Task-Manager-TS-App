@@ -13,11 +13,11 @@ export class TaskService {
   tasks = signal<any[]>([]);
 
   getTasks() {
-    // we need to send the token so the backend knows who we are!
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    // const token = localStorage.getItem('token');
+    // const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-    return this.http.get<any[]>(this.apiUrl, { headers }).subscribe(data => {
+    // return this.http.get<any[]>(this.apiUrl, { headers }).subscribe(data => {
+    return this.http.get<any[]>(this.apiUrl).subscribe(data => {
       this.tasks.set(data);
     });
   }
