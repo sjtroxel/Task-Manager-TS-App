@@ -1,1 +1,20 @@
-<p>task-list works!</p>
+<div class="dashboard">
+  <h2>Strawberry's Tasks!</h2>
+
+  @if (taskService.tasks().length ===0) {
+    <p>No tasks found. Time for a nap?!</p>
+  } @else {
+    <div class="task-grid">
+      @for (task of taskService.tasks(); track task._id) {
+        <div class="task-card" [class.completed]="task.completed">
+            <h3>{{ task.title }}</h3>
+            <p>{{ task.description }}</p>
+            <div class="actions">
+              <button>Done</button>
+              <button class="delete">Delete</button>
+            </div>
+        </div>
+      }
+    </div>
+  }
+</div>
