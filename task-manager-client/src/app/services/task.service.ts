@@ -45,4 +45,8 @@ export class TaskService {
       );
     });
   }
+
+  updateTask(id: string, data: { title: string, description: string }) {
+    return this.http.patch<any>(`${this.apiUrl}/${id}`, data);
+  }
 }

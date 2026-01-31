@@ -9,12 +9,24 @@
     <div class="task-grid">
       @for (task of taskService.tasks(); track task._id) {
         <div class="task-card" [class.completed]="task.completed">
+          @if (editingTaskId() === task._id) {
+        <input [(ngModel)]="editTitle" class="edit-input">
+        <textarea [(ngModel)]="editDescription" class="edit-input"></textarea>
+
+        <div class="actions">
+          <button (click)="saveEdit(task)" class="save">Save</button>
+          <button (click)="cancelEdit()" class="cancel">Cancel</button>
+        </div>
+      } @else {
             <h3>{{ task.title }}</h3>
             <p>{{ task.description }}</p>
+            
             <div class="actions">
               <button (click)="onToggle(task)">{{ task.completed ? 'Undo' : 'Done' }}</button>
+              <button (click)="startEdit(task)">Edit</button>
               <button class="delete" (click)="onDelete(task._id)">Delete</button>
             </div>
+          }
         </div>
       }
     </div>
