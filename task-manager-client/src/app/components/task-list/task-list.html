@@ -12,8 +12,8 @@
             <h3>{{ task.title }}</h3>
             <p>{{ task.description }}</p>
             <div class="actions">
-              <button>Done</button>
-              <button class="delete">Delete</button>
+              <button (click)="onToggle(task)">{{ task.completed ? 'Undo' : 'Done' }}</button>
+              <button class="delete" (click)="onDelete(task._id)">Delete</button>
             </div>
         </div>
       }

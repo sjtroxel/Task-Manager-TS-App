@@ -9,6 +9,7 @@ import { TaskForm } from '../task-form/task-form';
   templateUrl: './task-list.html',
   styleUrl: './task-list.scss',
 })
+
 export class TaskListComponent implements OnInit {
   // inject the service
   taskService = inject(TaskService);
@@ -16,5 +17,15 @@ export class TaskListComponent implements OnInit {
   ngOnInit() {
     // fetch tasks on load
     this.taskService.getTasks();
+  }
+
+  onDelete(id: string) {
+    if (confirm('Are you sure Strawberry wants to delete this?')) {
+      this.taskService.deleteTask(id);
+    }
+  }
+
+  onToggle(task: any) {
+    this.taskService.toggleDone(task);
   }
 }

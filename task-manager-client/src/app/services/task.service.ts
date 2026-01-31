@@ -28,4 +28,21 @@ export class TaskService {
       })
     );
   }
+
+  deleteTask(id: string) {
+    return this.http.delete(`${this.apiUrl}/${id}`).subscribe(() => {
+          // update the signal: filter out the deleted task
+      this.tasks.update(allTasks => allTasks.filter(t => t._id !== id));
+    });
+  }
+
+  toggleDone(task: any) {
+    const updatedStatus = { completed: !task.completed };
+    return this.http.patch(`${this.apiUrl}/${task._id}`, updatedStatus).subscribe(() => {
+          // update the signal: find the task and flip its status
+      this.tasks.update(allTasks =>
+        allTasks.map(t => t._id === task._id ? { ...t, completed: !t.completed } : t)
+      );
+    });
+  }
 }
