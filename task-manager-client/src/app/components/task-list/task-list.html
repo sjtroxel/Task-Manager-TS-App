@@ -1,6 +1,8 @@
 <div class="dashboard">
   <h2>Strawberry's Tasks!</h2>
 
+  <app-task-form /> <hr>
+
   @if (taskService.tasks().length ===0) {
     <p>No tasks found. Time for a nap?!</p>
   } @else {

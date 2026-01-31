@@ -1,5 +1,6 @@
 import { Injectable, signal, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -13,12 +14,18 @@ export class TaskService {
   tasks = signal<any[]>([]);
 
   getTasks() {
-    // const token = localStorage.getItem('token');
-    // const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
-    // return this.http.get<any[]>(this.apiUrl, { headers }).subscribe(data => {
     return this.http.get<any[]>(this.apiUrl).subscribe(data => {
       this.tasks.set(data);
     });
+  }
+
+  addTask(task: {title: string, description: string }) {
+    return this.http.post<any>(this.apiUrl, task).pipe(
+      tap((newTask) => {
+          // update the signal! this is the "magic" part -
+          // - it adds the new task to the existing list, without a page refresh.
+          this.tasks.update(currentTasks => [...currentTasks, newTask]);
+      })
+    );
   }
 }
