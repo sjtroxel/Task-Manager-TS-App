@@ -1,1 +1,42 @@
-<router-outlet />
+<div class="app-container" [class.open]="isSidebarOpen()">
+
+  <aside class="sidebar" [class.expanded]="isSidebarOpen()">
+    <div class="sidebar-header">
+      <button (click)="toggleSidebar()" class="icon-btn" title="Toggle Menu">
+        <lucide-icon name="menu"></lucide-icon>
+      </button>
+      @if (isSidebarOpen()) {
+        <span class="logo-text">Strawberry Tasks</span>
+      }
+    </div>
+
+    <nav class="nav-links">
+      <a routerLink="/tasks" routerLinkActive="active" class="nav-item">
+        <lucide-icon name="list-todo"></lucide-icon>
+        @if (isSidebarOpen()) {
+          <span>Tasks</span>
+        }
+      </a>
+      <a routerLink="/profile" routerLinkActive="active" class="nav-item">
+        <lucide-icon name="user"></lucide-icon>
+        @if (isSidebarOpen()) {
+          <span>Profile</span>
+        }
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button (click)="toggleTheme()" class="theme-toggle-btn">
+        <lucide-icon [name]="isDarkMode() ? 'sun' : 'moon'"></lucide-icon>
+        @if (isSidebarOpen()) {
+          <span>{{ isDarkMode() ? 'Light Mode' : 'Dark Mode' }}</span>
+        }
+      </button>
+    </div>
+  </aside>
+
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+
+</div>

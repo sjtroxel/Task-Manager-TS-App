@@ -19,6 +19,7 @@ export class SignupComponent {
   email = '';
   password = '';
   confirmPassword = '';
+  errorMessage = signal('');
   showPassword = signal(false);           // lucide-icon "eyeball" state
   showConfirmPassword = signal(false);    // separate signal!!
 
@@ -27,7 +28,13 @@ export class SignupComponent {
       alert("Passwords don't match! Strawberry is confused.");
       return;
     }
-    this.authService.register({ name: this.name, email: this.email, password: this.password })
-      .subscribe(() => this.router.navigate(['/tasks']));
+    this.authService.register({
+    name: this.name,
+    email: this.email,
+    password: this.password
+    }).subscribe({
+      next: () => this.router.navigate(['/tasks']),
+      error: (err) => this.errorMessage.set("Signup failed. Try a different email?")
+    });
   }
 }

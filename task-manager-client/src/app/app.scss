@@ -1,0 +1,119 @@
+// src/app/app.scss
+
+// 1. Tell Angular the root of this component must fill the screen
+:host {
+  display: block;
+  height: 100vh;
+  width: 100vw;
+}
+
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: var(--bg-color);
+
+  .sidebar {
+    width: 70px;
+    background: var(--nav-bg);
+    border-right: 1px solid var(--accent-secondary);
+    display: flex;
+    flex-direction: column;
+    transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 1rem 0.75rem;
+    z-index: 100;
+    box-shadow: var(--shadow);
+
+    // This matches the [class.expanded] in your HTML
+    &.expanded {
+      width: 260px;
+    }
+
+    .sidebar-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+
+      .logo-text {
+        font-weight: 700;
+        font-size: 1.2rem;
+        white-space: nowrap;
+        color: var(--accent-primary);
+        text-shadow: 0 0 10px var(--accent-primary);
+      }
+    }
+
+    .nav-links {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      .nav-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 12px;
+        color: var(--text-main);
+        text-decoration: none;
+        border-radius: 12px;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+
+        &:hover, &.active {
+          background: var(--accent-primary);
+          color: white;
+          lucide-icon { color: white; }
+        }
+      }
+    }
+
+    .sidebar-footer {
+      padding-top: 1rem;
+      border-top: 1px solid var(--accent-secondary);
+
+      .theme-toggle-btn {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 12px;
+        background: none;
+        border: none;
+        color: var(--text-main);
+        cursor: pointer;
+        border-radius: 12px;
+        transition: background 0.2s;
+        white-space: nowrap;
+
+        &:hover { background: var(--glass); }
+      }
+    }
+  }
+
+  // 2. The Main Content Area
+  .content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2rem;
+    background: var(--bg-color);
+    transition: background 0.4s ease;
+    display: flex; // Added this to help center the login form
+    flex-direction: column;
+  }
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  color: var(--text-main);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover { background: var(--glass); }
+}

@@ -5,7 +5,7 @@ import { authInterceptor } from './interceptors/auth-interceptor';
 
 import { routes } from './app.routes';
 
-import { LucideAngularModule, Eye, EyeOff } from 'lucide-angular'
+import { LucideAngularModule, Menu, ListTodo, User, Sun, Moon, Eye, EyeOff } from 'lucide-angular'
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,6 +14,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(
       withInterceptors([authInterceptor])
     ),
-    importProvidersFrom(LucideAngularModule.pick({ Eye, EyeOff }))
+    importProvidersFrom(LucideAngularModule.pick({ Menu, ListTodo, User, Sun, Moon, Eye, EyeOff }))
   ]
 };
