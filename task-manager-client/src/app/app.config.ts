@@ -1,9 +1,11 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { ApplicationConfig, provideBrowserGlobalErrorListeners, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './interceptors/auth-interceptor';
 
 import { routes } from './app.routes';
+
+import { LucideAngularModule, Eye, EyeOff } from 'lucide-angular'
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -11,6 +13,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(
       withInterceptors([authInterceptor])
-    )
+    ),
+    importProvidersFrom(LucideAngularModule.pick({ Eye, EyeOff }))
   ]
 };

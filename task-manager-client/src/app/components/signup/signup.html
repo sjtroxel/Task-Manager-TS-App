@@ -9,7 +9,20 @@
   </div>
   <div class="form-group">
     <label>Password</label>
-    <input type="password" [(ngModel)]="password" name="password" required>
+      <div class="input-with-eye">
+        <input [type]="showPassword() ? 'text' : 'password'" [(ngModel)]="password" name="password" required>
+        <button type="button" (click)="showPassword.set(!showPassword())" class="eye-btn">
+          <lucide-icon [name]="showPassword() ? 'eye-off' : 'eye'"></lucide-icon>
+        </button>
+      </div>
   </div>
-  <button type="submit" class="btn-primary">Create Account</button>
+  <div class="form-group">
+    <label>Confirm Password</label>
+      <div class="input-with-eye">
+        <input [type]="showConfirmPassword() ? 'text' : 'password'" [(ngModel)]="confirmPassword" name="confirmPassword" required>
+        <button type="button" (click)="showConfirmPassword.set(!showConfirmPassword())" class="eye-btn">
+          <lucide-icon [name]="showConfirmPassword() ? 'eye-off' : 'eye'"></lucide-icon>
+        </button>
+      </div>
+    </div>
 </form>

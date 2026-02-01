@@ -27,10 +27,12 @@ export const registerUser = async (req: Request, res: Response) => {
       password: hashedPassword,
     });
 
+    // we now send the token back, just like in the login controller!
     res.status(201).json({
       _id: user.id,
       name: user.name,
       email: user.email,
+      token: generateToken(user.id),
       message: 'User registered successfully!'
     });
   } catch (error) {
