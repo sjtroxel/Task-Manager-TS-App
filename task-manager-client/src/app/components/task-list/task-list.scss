@@ -1,7 +1,5 @@
 .dashboard {
-  padding: 2rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
 
   .header {
@@ -9,22 +7,22 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid #eee;
 
-    h2 { margin: 0; color: #2c3e50; }
+    h2 {
+      font-size: 1.8rem;
+      color: var(--accent-primary);
+      margin: 0;
+    }
 
     .logout-btn {
-      background-color: #f44336;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
+      background: none;
+      border: 1px solid var(--danger);
+      color: var(--danger);
+      padding: 8px 16px;
+      border-radius: 8px;
       cursor: pointer;
-      font-weight: 600;
-      transition: background 0.2s;
-
-      &:hover { background-color: #d32f2f; }
+      font-weight: bold;
+      &:hover { background: var(--danger); color: white; }
     }
   }
 
@@ -35,59 +33,54 @@
   }
 
   .task-card {
-    border: 1px solid #e0e0e0;
-    border-radius: 12px;
+    background: var(--card-bg);
     padding: 1.5rem;
-    background: #ffffff;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    transition: transform 0.2s, box-shadow 0.2s;
+    border-radius: 16px;
+    border: 1px solid var(--accent-secondary);
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
-    &:hover { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
+    &:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-primary);
+    }
 
     &.completed {
-      background-color: #f8f9fa;
-      opacity: 0.8;
-      border-left: 5px solid #28a745;
-
-      h3, p { text-decoration: line-through; color: #888; }
+      border-color: #2ecc71;
+      background: rgba(46, 204, 113, 0.05);
+      h3 { text-decoration: line-through; color: var(--text-muted); }
     }
 
-    // This makes the text look clean
-    h3 { margin: 0 0 0.5rem 0; font-size: 1.25rem; color: #333; }
-    p { margin: 0 0 1rem 0; color: #666; line-height: 1.4; }
-
-    .edit-input {
-      width: 100%;
-      margin-bottom: 10px;
-      padding: 10px;
-      border: 2px solid #e0e0e0;
-      border-radius: 6px;
-      box-sizing: border-box; // Crucial for layout!
-      font-size: 1rem;
-
-      &:focus { border-color: #3498db; outline: none; }
-    }
+    h3 { margin: 0 0 0.5rem 0; color: var(--accent-primary); font-size: 1.25rem; }
+    p { color: var(--text-main); line-height: 1.4; margin: 0; flex-grow: 1; }
 
     .actions {
       display: flex;
-      gap: 8px;
-      margin-top: auto; // Pushes buttons to bottom
+      gap: 0.5rem;
+      margin-top: 1.5rem;
 
       button {
-        cursor: pointer;
-        padding: 6px 12px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        background: #fff;
-        font-weight: 500;
         flex: 1;
+        padding: 8px;
+        border-radius: 6px;
+        border: 1px solid var(--accent-secondary);
+        background: var(--bg-color);
+        color: var(--text-main);
+        cursor: pointer;
+        font-family: 'Nunito';
+        font-weight: 600;
+        transition: 0.2s;
 
-        &:hover { background: #f0f0f0; }
-
-        &.save { background-color: #28a745; color: white; border: none; }
-        &.cancel { background-color: #6c757d; color: white; border: none; }
-        &.delete { background-color: #dc3545; color: white; border: none; }
+        &:hover { background: var(--glass); border-color: var(--accent-primary); }
+        &.delete { border-color: var(--danger); color: var(--danger); &:hover { background: var(--danger); color: white; } }
       }
+    }
+
+    .edit-input {
+      margin-bottom: 0.5rem;
     }
   }
 }

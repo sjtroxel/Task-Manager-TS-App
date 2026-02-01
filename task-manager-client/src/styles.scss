@@ -2,12 +2,12 @@
 
 :root {
   /* LIGHT MODE (Ice/Ocean) */
-  --bg-color: #f0f8ff; // Alice Blue (very light ice)
+  --bg-color: #f0f8ff;
   --card-bg: #ffffff;
-  --text-main: #001f3f; // Midnight Navy
-  --text-muted: #4682b4; // Steel Blue
-  --accent-primary: #00d4ff; // Neon Ice Blue
-  --accent-secondary: #0077be; // Ocean Blue
+  --text-main: #001f3f;
+  --text-muted: #4682b4;
+  --accent-primary: #00d4ff;
+  --accent-secondary: #0077be;
   --danger: #ff4757;
   --nav-bg: #e1eef6;
   --shadow: 0 4px 20px rgba(0, 119, 190, 0.1);
@@ -16,13 +16,13 @@
 
 [data-theme='dark'] {
   /* DARK MODE (Neon Angular) */
-  --bg-color: #050101; // Deepest Red-tinted Black
-  --card-bg: #120101; // Darker Maroon/Red
+  --bg-color: #050101;
+  --card-bg: #120101;
   --text-main: #ffffff;
-  --text-muted: #ffb7c5; // Soft Pink
-  --accent-primary: #ff007f; // Angular Neon Pink
-  --accent-secondary: #bc13fe; // Angular Purple
-  --danger: #ff3131; // Neon Red
+  --text-muted: #ffb7c5;
+  --accent-primary: #ff007f;
+  --accent-secondary: #bc13fe;
+  --danger: #ff3131;
   --nav-bg: #1a0101;
   --shadow: 0 4px 30px rgba(255, 0, 127, 0.3);
   --glass: rgba(18, 1, 1, 0.8);
@@ -34,5 +34,75 @@ body {
   background-color: var(--bg-color);
   color: var(--text-main);
   font-family: 'Nunito', sans-serif;
-  transition: background-color 0.4s ease, color 0.4s ease; // The "Smooth Transition"
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* GLOBAL FORM STYLING */
+.form-group {
+  margin-bottom: 1.2rem;
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--text-main);
+  }
+
+  /* THE GLOBAL EYEBALL FIX */
+  .input-with-eye {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    input {
+      width: 100%;
+      padding: 12px;
+      padding-right: 45px;
+      background: var(--bg-color);
+      border: 1px solid var(--accent-secondary);
+      border-radius: 8px;
+      color: var(--text-main);
+      font-family: 'Nunito', sans-serif;
+      transition: all 0.2s;
+
+      &:focus {
+        outline: none;
+        border-color: var(--accent-primary);
+        box-shadow: 0 0 8px var(--accent-primary);
+      }
+    }
+
+    .eye-btn {
+      position: absolute;
+      right: 8px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      padding: 5px;
+
+      &:hover { color: var(--accent-primary); }
+
+      lucide-icon { width: 20px; height: 20px; }
+    }
+  }
+}
+
+/* DEFAULT INPUT (NON-EYE) */
+input:not([type="checkbox"]), textarea {
+  width: 100%;
+  padding: 12px;
+  background: var(--bg-color);
+  border: 1px solid var(--accent-secondary);
+  border-radius: 8px;
+  color: var(--text-main);
+  font-family: 'Nunito', sans-serif;
+  box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 8px var(--accent-primary);
+  }
 }

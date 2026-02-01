@@ -1,0 +1,46 @@
+.form-container {
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px dashed var(--accent-secondary);
+  margin-bottom: 2rem;
+
+  h3 {
+    margin-top: 0;
+    color: var(--text-main);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+    }
+
+    input {
+      flex: 1;
+      /* Inherits global input styles from styles.scss */
+    }
+
+    button {
+      background: var(--accent-primary);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      font-family: 'Nunito';
+      transition: transform 0.2s;
+
+      &:hover:not(:disabled) { transform: translateY(-2px); }
+      &:disabled { opacity: 0.5; cursor: not-allowed; }
+    }
+  }
+}
