@@ -2,11 +2,13 @@ import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { SignupComponent } from '../signup/signup';
 
 @Component({
   selector: 'app-login',
   // standalone: true,        // this is actually not required anymore despite all the LLMs including it
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule, SignupComponent],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
@@ -14,6 +16,9 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
+
+  authMode = signal<'login' | 'signup'>('login');   // toggle between login/signup
+  showForgotPassword = signal(false);               // logic for password foldout
 
   // form data
   email = '';

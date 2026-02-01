@@ -29,4 +29,13 @@ export class AuthService {
     this.currentUser.set(null);
     localStorage.removeItem('token');
   }
+
+  register(userData: any) {
+    return this.http.post(`${this.apiUrl}/register`, userData).pipe(
+      tap((response: any) => {
+        this.currentUser.set(response);
+        localStorage.setItem('token', response.token);
+      })
+    );
+  }
 }

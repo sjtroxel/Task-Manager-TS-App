@@ -1,0 +1,82 @@
+.auth-wrapper {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+
+  .auth-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+
+    .auth-tabs {
+      display: flex;
+      margin-bottom: 2rem;
+      border-bottom: 2px solid #eee;
+
+      button {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        background: none;
+        cursor: pointer;
+        font-weight: bold;
+        color: #888;
+        transition: all 0.3s;
+
+        &.active {
+          color: #3498db;
+          border-bottom: 2px solid #3498db;
+          margin-bottom: -2px;
+        }
+      }
+    }
+
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        input {
+          padding: 12px;
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          font-size: 1rem;
+          &:focus { border-color: #3498db; outline: none; }
+        }
+      }
+
+      .btn-primary {
+        background: #3498db;
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        &:hover { background: #2980b9; }
+      }
+    }
+
+    .foldout-container {
+      font-size: 0.9rem;
+      a { color: #3498db; text-decoration: none; }
+      .foldout-content {
+        margin-top: 10px;
+        padding: 10px;
+        background: #fff3cd;
+        border-radius: 6px;
+        color: #856404;
+      }
+    }
+  }
+}
