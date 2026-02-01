@@ -3,7 +3,7 @@ import { TaskService } from '../../services/task.service';
 import { CommonModule } from '@angular/common';
 import { TaskForm } from '../task-form/task-form';
 import { FormsModule } from '@angular/forms';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-task-list',
@@ -15,6 +15,9 @@ import { FormsModule } from '@angular/forms';
 export class TaskListComponent implements OnInit {
   // inject the service
   taskService = inject(TaskService);
+
+  // inject the router
+  private router = inject(Router);
 
   ngOnInit() {
     // fetch tasks on load
@@ -58,5 +61,10 @@ export class TaskListComponent implements OnInit {
       );
       this.cancelEdit();
     });
+  }
+
+  onLogout() {
+    localStorage.removeItem('token');   // clear the VIP pass
+    this.router.navigate(['/login']);   // send them back to the start
   }
 }

@@ -1,7 +1,11 @@
 <div class="dashboard">
-  <h2>Strawberry's Tasks!</h2>
+  <div class="header">
+    <h2>Strawberry's Tasks! 🍓</h2>
+    <button class="logout-btn" (click)="onLogout()">Logout</button>
+  </div>
 
-  <app-task-form /> <hr>
+  <app-task-form />
+  <hr>
 
   @if (taskService.tasks().length ===0) {
     <p>No tasks found. Time for a nap?!</p>
@@ -20,7 +24,7 @@
       } @else {
             <h3>{{ task.title }}</h3>
             <p>{{ task.description }}</p>
-            
+
             <div class="actions">
               <button (click)="onToggle(task)">{{ task.completed ? 'Undo' : 'Done' }}</button>
               <button (click)="startEdit(task)">Edit</button>
