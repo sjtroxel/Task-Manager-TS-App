@@ -1,32 +1,52 @@
 <div class="profile-container">
   <div class="profile-card">
-    <h2>Account Settings</h2>
-    <p class="subtitle">Update your personal information below.</p>
+    <div class="card-header">
+      <h2>Account Settings</h2>
+      <button class="logout-btn" (click)="onLogout()">Logout</button>
+    </div>
+
+    <p class="subtitle">Keep your info fresh and secure.</p>
 
     <div class="form-group">
       <label>Display Name</label>
-      <input
-        type="text"
-        [ngModel]="newName()"
-        (ngModelChange)="newName.set($event)"
-        placeholder="Enter new name"
-      >
+      <input type="text" [ngModel]="newName()" (ngModelChange)="newName.set($event)">
     </div>
 
     <div class="form-group">
       <label>Email Address</label>
-      <input type="email" [value]="authService.currentUser()?.email" disabled title="Email cannot be changed">
-      <small>Email changes are currently disabled for security.</small>
+      <input type="email" [value]="authService.currentUser()?.email" disabled>
+    </div>
+
+    <hr class="divider">
+
+    <div class="form-group">
+      <label>New Password (leave blank to keep current)</label>
+      <div class="input-with-eye">
+        <input [type]="showNewPass() ? 'text' : 'password'" [(ngModel)]="newPassword">
+        <button type="button" (click)="showNewPass.set(!showNewPass())" class="eye-btn">
+          <lucide-icon [name]="showNewPass() ? 'eye-off' : 'eye'"></lucide-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Confirm New Password</label>
+      <div class="input-with-eye">
+        <input [type]="showConfirmPass() ? 'text' : 'password'" [(ngModel)]="confirmPassword">
+        <button type="button" (click)="showConfirmPass.set(!showConfirmPass())" class="eye-btn">
+          <lucide-icon [name]="showConfirmPass() ? 'eye-off' : 'eye'"></lucide-icon>
+        </button>
+      </div>
     </div>
 
     @if (message()) {
-      <div class="status-message" [class.success]="!message().includes('unimpressed')">
+      <div class="status-message" [class.success]="message().includes('successfully')">
         {{ message() }}
       </div>
     }
 
     <button class="btn-primary" (click)="updateProfile()">
-      Save Changes
+      Save All Changes
     </button>
   </div>
 </div>

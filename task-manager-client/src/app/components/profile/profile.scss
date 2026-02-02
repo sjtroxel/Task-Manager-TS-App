@@ -1,7 +1,6 @@
 .profile-container {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
   padding-top: 2rem;
 
   .profile-card {
@@ -13,22 +12,34 @@
     width: 100%;
     max-width: 500px;
 
-    h2 {
-      margin-top: 0;
-      color: var(--accent-primary);
-      font-size: 1.8rem;
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+
+      h2 { margin: 0; color: var(--accent-primary); font-size: 1.8rem; }
+
+      .logout-btn {
+        background: none;
+        border: 1px solid var(--danger);
+        color: var(--danger);
+        padding: 6px 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.2s;
+        &:hover { background: var(--danger); color: white; }
+      }
     }
 
-    .subtitle {
-      color: var(--text-muted);
-      margin-bottom: 2rem;
-    }
+    .subtitle { color: var(--text-muted); margin-bottom: 2rem; }
 
-    small {
-      color: var(--text-muted);
-      font-style: italic;
-      display: block;
-      margin-top: 0.25rem;
+    .divider {
+      border: 0;
+      border-top: 1px solid var(--accent-secondary);
+      margin: 2rem 0;
+      opacity: 0.3;
     }
 
     .status-message {
@@ -39,11 +50,7 @@
       text-align: center;
       background: rgba(255, 71, 87, 0.1);
       color: var(--danger);
-
-      &.success {
-        background: rgba(0, 212, 255, 0.1);
-        color: var(--accent-primary);
-      }
+      &.success { background: rgba(0, 212, 255, 0.1); color: var(--accent-primary); }
     }
 
     .btn-primary {
@@ -55,14 +62,9 @@
       border-radius: 12px;
       font-weight: bold;
       cursor: pointer;
-      margin-top: 1rem;
       font-family: 'Nunito';
       transition: all 0.2s ease;
-
-      &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px var(--accent-primary);
-      }
+      &:hover { transform: translateY(-2px); box-shadow: 0 5px 15px var(--accent-primary); }
     }
   }
 }
