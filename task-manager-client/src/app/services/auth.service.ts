@@ -40,4 +40,19 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
   }
+
+  updateProfile(updates: { name: string; password?: string }) {
+    // this sends a PUT request to http://localhost:5000/api/users/profile
+    // the authInterceptor will automatically attach the Token!
+    return this.http.put(`${this.apiUrl}/profile`, updates).pipe(
+      tap((updatedUser: any) => {
+        // update the signal and localStorage with the fresh data from the server
+        const current = this.currentUser();
+        const merged = { ...current, ...updatedUser };
+
+        this.currentUser.set(merged);
+        localStorage.setItem('user', JSON.stringify(merged));
+      })
+    );
+  }
 }

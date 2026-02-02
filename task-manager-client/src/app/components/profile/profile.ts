@@ -37,17 +37,26 @@ export class ProfileComponent {
       return;
     }
 
-    // update the local state
-    const currentUser = this.authService.currentUser();
-    this.authService.currentUser.set({ ...currentUser, name: this.newName() });
+    // prepare the data packet
+    const updateData: any = { name: this.newName() };
+    if (this.newPassword()) {
+      updateData.password = this.newPassword();
+    }
 
-    // save to localStorage, so it persists
-    localStorage.setItem('user', JSON.stringify(this.authService.currentUser()));
+    // call the Backend
+    this.authService.updateProfile(updateData).subscribe({
+      next: () => {
+        this.message.set("Profile synced with database!!");
+        this.newPassword.set('');      // clear fields for security
+        this.confirmPassword.set('');
 
-    this.message.set("Profile updated successfully!!");
-
-    // clear message after 3 seconds
-    setTimeout(() => this.message.set(''), 3000);
+        setTimeout(() => this.message.set(''), 3000);
+      },
+      error: (err) => {
+        console.error(err);
+        this.message.set("Server error: Could not update profile!");
+      }
+    });
   }
 
   onLogout() {

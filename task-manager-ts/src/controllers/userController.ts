@@ -64,4 +64,38 @@ export const loginUser = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(500).json({ message: 'Server error!' });
   }
-}
+};
+
+// @desc    Update user profile
+// @route   PUT /api/users/profile
+// @access  Private
+export const updateUserProfile = async (req: any, res: Response) => {
+  try {
+    // req.user was attached by our protect middleware!
+    const user = await User.findById(req.user._id);
+
+    if (user) {
+      user.name = req.body.name || user.name;
+      // Note: we don't change the email here as per your frontend design
+
+      if (req.body.password) {
+        // Hash the new password before saving
+        const salt = await bcrypt.genSalt(10);
+        user.password = await bcrypt.hash(req.body.password, salt);
+      }
+
+      const updatedUser = await user.save();
+
+      res.json({
+        _id: updatedUser.id,
+        name: updatedUser.name,
+        email: updatedUser.email,
+        token: generateToken(updatedUser.id),
+      });
+    } else {
+      res.status(404).json({ message: 'User not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Server error: Profile update failed' });
+  }
+};
