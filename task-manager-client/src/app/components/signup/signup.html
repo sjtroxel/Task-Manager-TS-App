@@ -1,28 +1,39 @@
 <form (submit)="onSignup(); $event.preventDefault()" class="auth-form">
   <div class="form-group">
     <label>Name</label>
-    <input type="text" [(ngModel)]="name" name="name" required>
+    <input type="text" [(ngModel)]="name" name="name" placeholder="How should we call you?" required>
   </div>
+
   <div class="form-group">
     <label>Email</label>
-    <input type="email" [(ngModel)]="email" name="email" required>
+    <input type="email" [(ngModel)]="email" name="email" placeholder="email@example.com" required>
   </div>
+
   <div class="form-group">
     <label>Password</label>
-      <div class="input-with-eye">
-        <input [type]="showPassword() ? 'text' : 'password'" [(ngModel)]="password" name="password" required>
-        <button type="button" (click)="showPassword.set(!showPassword())" class="eye-btn">
-          <lucide-icon [name]="showPassword() ? 'eye-off' : 'eye'"></lucide-icon>
-        </button>
-      </div>
+    <div class="input-with-eye">
+      <input [type]="showPassword() ? 'text' : 'password'" [(ngModel)]="password" name="password" required>
+      <button type="button" (click)="showPassword.set(!showPassword())" class="eye-btn">
+        <lucide-icon [name]="showPassword() ? 'eye-off' : 'eye'"></lucide-icon>
+      </button>
+    </div>
   </div>
+
   <div class="form-group">
     <label>Confirm Password</label>
-      <div class="input-with-eye">
-        <input [type]="showConfirmPassword() ? 'text' : 'password'" [(ngModel)]="confirmPassword" name="confirmPassword" required>
-        <button type="button" (click)="showConfirmPassword.set(!showConfirmPassword())" class="eye-btn">
-          <lucide-icon [name]="showConfirmPassword() ? 'eye-off' : 'eye'"></lucide-icon>
-        </button>
-      </div>
+    <div class="input-with-eye">
+      <input [type]="showConfirmPassword() ? 'text' : 'password'" [(ngModel)]="confirmPassword" name="confirmPassword" required>
+      <button type="button" (click)="showConfirmPassword.set(!showConfirmPassword())" class="eye-btn">
+        <lucide-icon [name]="showConfirmPassword() ? 'eye-off' : 'eye'"></lucide-icon>
+      </button>
     </div>
+  </div>
+
+  @if (errorMessage()) {
+    <p class="error-text" style="color: var(--danger); margin-bottom: 1rem;">{{ errorMessage() }}</p>
+  }
+
+  <button type="submit" class="btn-primary" [disabled]="!name || !email || !password">
+    Create Account
+  </button>
 </form>

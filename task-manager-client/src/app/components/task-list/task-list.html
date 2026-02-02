@@ -1,6 +1,6 @@
 <div class="dashboard">
   <div class="header">
-    <h2>Strawberry's Tasks! 🍓</h2>
+    <h2>{{ authService.currentUser()?.name || 'My' }}'s Tasks! 🍓</h2>
     <button class="logout-btn" (click)="onLogout()">Logout</button>
   </div>
 

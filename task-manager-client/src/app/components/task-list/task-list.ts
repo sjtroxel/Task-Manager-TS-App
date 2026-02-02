@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { TaskForm } from '../task-form/task-form';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-task-list',
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
 })
 
 export class TaskListComponent implements OnInit {
-  // inject the service
+  public authService = inject(AuthService);
   taskService = inject(TaskService);
 
   // inject the router
@@ -64,7 +65,7 @@ export class TaskListComponent implements OnInit {
   }
 
   onLogout() {
-    localStorage.removeItem('token');   // clear the VIP pass
-    this.router.navigate(['/login']);   // send them back to the start
+    this.authService.logout();  // use the service method!
+    this.router.navigate(['/login']);
   }
 }
