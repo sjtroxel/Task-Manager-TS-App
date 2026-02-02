@@ -1,0 +1,32 @@
+<div class="profile-container">
+  <div class="profile-card">
+    <h2>Account Settings</h2>
+    <p class="subtitle">Update your personal information below.</p>
+
+    <div class="form-group">
+      <label>Display Name</label>
+      <input
+        type="text"
+        [ngModel]="newName()"
+        (ngModelChange)="newName.set($event)"
+        placeholder="Enter new name"
+      >
+    </div>
+
+    <div class="form-group">
+      <label>Email Address</label>
+      <input type="email" [value]="authService.currentUser()?.email" disabled title="Email cannot be changed">
+      <small>Email changes are currently disabled for security.</small>
+    </div>
+
+    @if (message()) {
+      <div class="status-message" [class.success]="!message().includes('unimpressed')">
+        {{ message() }}
+      </div>
+    }
+
+    <button class="btn-primary" (click)="updateProfile()">
+      Save Changes
+    </button>
+  </div>
+</div>
