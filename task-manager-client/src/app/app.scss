@@ -47,6 +47,17 @@
         color: var(--accent-secondary);
         text-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
       }
+
+      .logo-link {
+        text-decoration: none;
+        color: inherit; // Keeps it the same color as your text-main
+        cursor: pointer;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+          opacity: 0.8; // Subtle feedback when hovering
+        }
+      }
     }
 
     .nav-links {

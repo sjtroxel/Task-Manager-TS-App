@@ -66,6 +66,6 @@ export class TaskListComponent implements OnInit {
 
   onLogout() {
     this.authService.logout();  // use the service method!
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
   }
 }

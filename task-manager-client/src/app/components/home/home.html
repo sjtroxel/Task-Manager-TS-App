@@ -11,8 +11,12 @@
     </p>
 
     <div class="cta-group">
-      <button class="btn-primary-lg" routerLink="/signup">Get Started for Free</button>
-      <button class="btn-secondary-lg" routerLink="/login">Sign In</button>
+      @if (authService.currentUser()) {
+        <button class="btn-primary-lg" routerLink="/tasks">Return to Dashboard</button>
+      } @else {
+        <button class="btn-primary-lg" [routerLink]="['/login']" [queryParams]="{ mode: 'signup' }">Get Started for Free</button>
+        <button class="btn-secondary-lg" routerLink="/login">Sign In</button>
+      }
     </div>
   </section>
 
