@@ -2,10 +2,12 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login';
 import { TaskListComponent } from './components/task-list/task-list';
 import { ProfileComponent } from './components/profile/profile';
+import { HomeComponent } from './components/home/home';
 
 export const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  { path: '', component: HomeComponent },               // the new front door
+  { path: 'login', component: LoginComponent },         // handles both login & signup
   { path: 'tasks', component: TaskListComponent},
   { path: 'profile', component: ProfileComponent },
-  { path: '', redirectTo: 'login', pathMatch: 'full' }  // default to login page
+  { path: '**', redirectTo: '' }                        // redirect 404s to home
 ];
