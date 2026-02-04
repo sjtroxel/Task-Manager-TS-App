@@ -1,6 +1,7 @@
 import { Injectable, signal, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { tap } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,7 @@ import { tap } from 'rxjs';
 
 export class TaskService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:5000/api/tasks';
+  private apiUrl = `${environment.apiUrl}/tasks`;
 
   // signal to store our list of tasks
   tasks = signal<any[]>([]);

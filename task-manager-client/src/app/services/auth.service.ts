@@ -1,6 +1,7 @@
 import { Injectable, signal, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,7 @@ import { tap } from 'rxjs';
 
 export class AuthService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:5000/api/users';
+  private apiUrl = `${environment.apiUrl}/users`;
 
   currentUser = signal<any | null>(JSON.parse(localStorage.getItem('user') || 'null'));
 
