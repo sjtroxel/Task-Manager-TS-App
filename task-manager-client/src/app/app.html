@@ -15,26 +15,20 @@
     <nav class="nav-links">
       <a routerLink="/tasks" routerLinkActive="active" class="nav-item">
         <lucide-icon name="list-todo"></lucide-icon>
-        @if (isSidebarOpen()) {
-          <span>Tasks</span>
-        }
+        @if (isSidebarOpen()) { <span>Tasks</span> }
       </a>
       <a routerLink="/profile" routerLinkActive="active" class="nav-item">
         <lucide-icon name="user"></lucide-icon>
-        @if (isSidebarOpen()) {
-          <span>Profile</span>
-        }
+        @if (isSidebarOpen()) { <span>Profile</span> }
       </a>
-    </nav>
 
-    <div class="sidebar-footer">
-      <button (click)="toggleTheme()" class="theme-toggle-btn">
+      <button (click)="toggleTheme()" class="nav-item theme-toggle-item">
         <lucide-icon [name]="isDarkMode() ? 'sun' : 'moon'"></lucide-icon>
         @if (isSidebarOpen()) {
           <span>{{ isDarkMode() ? 'Light Mode' : 'Dark Mode' }}</span>
         }
       </button>
-    </div>
+    </nav>
   </aside>
 
   <main class="content">

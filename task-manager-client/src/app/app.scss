@@ -61,7 +61,6 @@
     }
 
     .nav-links {
-      flex: 1;
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
@@ -89,31 +88,15 @@
       }
     }
 
-    .sidebar-footer {
+    // Add this to make the toggle look like a nav item
+    .theme-toggle-item {
+      background: none;
+      border: none;
+      cursor: pointer;
       width: 100%;
-      padding-top: 1rem;
-      border-top: 1px solid var(--accent-secondary);
-      display: flex;
-      justify-content: center;
-
-      .theme-toggle-btn {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 1rem;
-        padding: 12px;
-        background: none;
-        border: none;
-        color: var(--text-main);
-        cursor: pointer;
-        border-radius: 12px;
-        transition: background 0.2s;
-        white-space: nowrap;
-
-        &.expanded { justify-content: flex-start; }
-        &:hover { background: var(--glass); }
-      }
+      margin-top: 1rem; // Adds a little "breathing room" from the links
+      border-top: 1px solid var(--accent-secondary); // Keeps a subtle visual separation
+      padding-top: 1.5rem !important;
     }
   }
 
