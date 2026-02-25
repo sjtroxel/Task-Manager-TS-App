@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1772039945357" clover="3.2.0">
+  <project timestamp="1772039945357" name="All files">
+    <metrics statements="94" coveredstatements="94" conditionals="24" coveredconditionals="24" methods="10" coveredmethods="10" elements="128" coveredelements="128" complexity="0" loc="94" ncloc="94" packages="6" files="9" classes="9"/>
+    <package name="src">
+      <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="app.ts" path="/home/sjtroxel/task-manager-ts/task-manager-ts/src/app.ts">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="14" count="3" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.controllers">
+      <metrics statements="63" coveredstatements="63" conditionals="20" coveredconditionals="20" methods="7" coveredmethods="7"/>
+      <file name="taskController.ts" path="/home/sjtroxel/task-manager-ts/task-manager-ts/src/controllers/taskController.ts">
+        <metrics statements="31" coveredstatements="31" conditionals="8" coveredconditionals="8" methods="4" coveredmethods="4"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="7" count="5" type="stmt"/>
+        <line num="9" count="5" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="18" count="3" type="stmt"/>
+        <line num="19" count="15" type="stmt"/>
+        <line num="20" count="15" type="stmt"/>
+        <line num="22" count="15" type="stmt"/>
+        <line num="28" count="13" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="36" count="3" type="stmt"/>
+        <line num="37" count="7" type="stmt"/>
+        <line num="38" count="7" type="stmt"/>
+        <line num="40" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="46" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="47" count="2" type="stmt"/>
+        <line num="50" count="3" type="stmt"/>
+        <line num="53" count="3" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
+        <line num="61" count="3" type="stmt"/>
+        <line num="62" count="5" type="stmt"/>
+        <line num="63" count="5" type="stmt"/>
+        <line num="65" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="66" count="1" type="stmt"/>
+        <line num="70" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="71" count="1" type="stmt"/>
+        <line num="74" count="2" type="stmt"/>
+        <line num="75" count="2" type="stmt"/>
+        <line num="77" count="1" type="stmt"/>
+      </file>
+      <file name="userController.ts" path="/home/sjtroxel/task-manager-ts/task-manager-ts/src/controllers/userController.ts">
+        <metrics statements="32" coveredstatements="32" conditionals="12" coveredconditionals="12" methods="3" coveredmethods="3"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="9" count="40" type="stmt"/>
+        <line num="10" count="40" type="stmt"/>
+        <line num="13" count="40" type="stmt"/>
+        <line num="14" count="40" type="cond" truecount="2" falsecount="0"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="20" count="39" type="stmt"/>
+        <line num="21" count="39" type="stmt"/>
+        <line num="24" count="38" type="stmt"/>
+        <line num="31" count="36" type="stmt"/>
+        <line num="39" count="3" type="stmt"/>
+        <line num="45" count="3" type="stmt"/>
+        <line num="46" count="34" type="stmt"/>
+        <line num="47" count="34" type="stmt"/>
+        <line num="50" count="34" type="stmt"/>
+        <line num="54" count="33" type="cond" truecount="4" falsecount="0"/>
+        <line num="55" count="31" type="stmt"/>
+        <line num="62" count="2" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="72" count="3" type="stmt"/>
+        <line num="73" count="5" type="stmt"/>
+        <line num="75" count="5" type="stmt"/>
+        <line num="77" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="78" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="81" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="83" count="1" type="stmt"/>
+        <line num="84" count="1" type="stmt"/>
+        <line num="87" count="4" type="stmt"/>
+        <line num="89" count="3" type="stmt"/>
+        <line num="96" count="1" type="stmt"/>
+        <line num="99" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.middleware">
+      <metrics statements="9" coveredstatements="9" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
+      <file name="authMiddleware.ts" path="/home/sjtroxel/task-manager-ts/task-manager-ts/src/middleware/authMiddleware.ts">
+        <metrics statements="9" coveredstatements="9" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="14" count="48" type="cond" truecount="4" falsecount="0"/>
+        <line num="15" count="41" type="stmt"/>
+        <line num="17" count="41" type="stmt"/>
+        <line num="20" count="41" type="stmt"/>
+        <line num="24" count="41" type="stmt"/>
+        <line num="26" count="37" type="stmt"/>
+        <line num="28" count="4" type="stmt"/>
+        <line num="31" count="7" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.models">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="taskModel.ts" path="/home/sjtroxel/task-manager-ts/task-manager-ts/src/models/taskModel.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="12" count="3" type="stmt"/>
+      </file>
+      <file name="userModel.ts" path="/home/sjtroxel/task-manager-ts/task-manager-ts/src/models/userModel.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="9" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.routes">
+      <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="taskRoutes.ts" path="/home/sjtroxel/task-manager-ts/task-manager-ts/src/routes/taskRoutes.ts">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="14" count="3" type="stmt"/>
+        <line num="17" count="3" type="stmt"/>
+        <line num="20" count="3" type="stmt"/>
+      </file>
+      <file name="userRoutes.ts" path="/home/sjtroxel/task-manager-ts/task-manager-ts/src/routes/userRoutes.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.utils">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="generateToken.ts" path="/home/sjtroxel/task-manager-ts/task-manager-ts/src/utils/generateToken.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="6" count="70" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

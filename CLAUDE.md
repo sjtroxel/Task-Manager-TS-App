@@ -71,11 +71,18 @@ task-manager-client/       # Frontend (Angular SPA)
 - Error handling: backend returns `{ message: '...' }` with proper HTTP status codes
 
 ## Testing
-**WARNING: Test coverage is effectively 0%.** All 10 frontend spec files are unmodified scaffolds (`expect(component).toBeTruthy()`). Backend has zero test files.
 
-- Frontend tests: `npm test` in `task-manager-client/` (Vitest + Angular TestBed)
-- Test files: `*.spec.ts` co-located with source
-- Backend tests: none exist yet
+### Backend (`task-manager-ts/`) — 100% coverage
+- Framework: Vitest 4.x + Supertest + mongodb-memory-server
+- Run: `npm test` | Watch: `npm run test:watch` | Coverage: `npm run test:coverage`
+- Test files: `tests/auth.test.ts`, `tests/tasks.test.ts`, `tests/users.test.ts`
+- Setup: `tests/setup.ts` (spins up in-memory MongoDB, clears collections between tests)
+- `src/app.ts` exports the Express app for testing; `src/server.ts` handles DB connect + listen
+
+### Frontend (`task-manager-client/`) — coverage gap
+- Framework: Vitest 4.x + Angular TestBed
+- Run: `npm test` in `task-manager-client/`
+- Test files: `*.spec.ts` co-located with source — **still unmodified scaffolds, high-priority gap**
 
 **Claude: run tests after every non-trivial change. Treat failing tests as the highest priority signal. When adding new features, write meaningful tests that encode business rules.**
 

@@ -23,13 +23,11 @@ export const protect = async (req: AuthRequest, res: Response, next: NextFunctio
       // .select('-password') means "get the user but don't include the hashed password"
       req.user = await User.findById(decoded.id).select('-password');
 
-      return next();       // move on to the actual controller
+      next();       // move on to the actual controller
     } catch (error) {
-      return res.status(401).json({ message: 'Not authorized, token failed!' });
+      res.status(401).json({ message: 'Not authorized, token failed!' });
     }
-  }
-
-  if (!token) {
+  } else {
     res.status(401).json({ message: 'Not authorized, no token!' });
   }
 };

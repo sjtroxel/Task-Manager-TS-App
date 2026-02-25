@@ -14,6 +14,7 @@
 - DO NOT skip the `protect` middleware on routes that access user data
 - DO NOT return raw Mongoose errors to the client — wrap in `{ message: '...' }` with appropriate status codes
 - DO NOT use `require()` — the backend uses ES modules (`"type": "module"`)
+- DO NOT import from `src/server.ts` in tests — import the app from `src/app.ts` instead (server.ts connects to the real DB and calls listen)
 
 ## State Management
 - DO NOT introduce NgRx, Akita, or external state libraries — use Angular Signals (`signal()`, `.set()`, `.update()`)
