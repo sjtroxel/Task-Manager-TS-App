@@ -6,7 +6,6 @@ import { TaskService } from '../../services/task.service';
   selector: 'app-task-form',
   imports: [FormsModule],
   templateUrl: './task-form.html',
-  styleUrl: './task-form.scss',
 })
 
 export class TaskForm {

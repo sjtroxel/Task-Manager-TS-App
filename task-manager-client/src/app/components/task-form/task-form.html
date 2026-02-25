@@ -1,10 +1,15 @@
-<section class="form-container">
-  <h3>Add New Task</h3>
+<section class="bg-glass backdrop-blur-[10px] p-6 rounded-xl border border-dashed border-accent-2 mb-8">
+  <h3 class="mt-0 text-text text-[1.1rem] mb-4">Add New Task</h3>
   <form (submit)="onSubmit(); $event.preventDefault()">
-    <div class="input-group">
-      <input [(ngModel)]="title" name="title" placeholder="What needs doing?" required>
-      <input [(ngModel)]="description" name="description" placeholder="Add a description...">
-      <button type="submit" [disabled]="!title">Add Task!</button>
+    <div class="flex flex-col gap-4 md:flex-row">
+      <input class="flex-1" [(ngModel)]="title" name="title" placeholder="What needs doing?" required>
+      <input class="flex-1" [(ngModel)]="description" name="description" placeholder="Add a description...">
+      <button
+        type="submit"
+        class="bg-accent text-white border-none px-6 py-3 rounded-lg font-bold cursor-pointer shadow-card font-sans transition-transform duration-200 enabled:hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed"
+        [disabled]="!title">
+        Add Task!
+      </button>
     </div>
   </form>
 </section>

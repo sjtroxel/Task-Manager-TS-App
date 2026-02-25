@@ -6,18 +6,22 @@ paths:
 # Styling Rules
 
 ## Technology
-- SCSS with CSS custom properties (variables) for theming
-- No utility-first framework (no Tailwind) — write component-scoped SCSS
+- **Tailwind V4** via `@tailwindcss/vite` (Vite plugin — no PostCSS config file)
+- CSS custom properties defined in `@theme` block in `src/styles.css`
+- Do NOT create new `.scss` files for new components — use Tailwind utilities in templates
+- **Migration in progress**: un-migrated components still have `.scss` files; `styles.scss` coexists with `styles.css` temporarily
+- See `project-specs/04-tailwind-migration-implementation.md` for migration order and token reference
 
 ## Theming
 - Light/dark mode toggle via `isDarkMode` signal in root `app.ts`
-- Theme applied using CSS variables defined at `:root` and `[data-theme="dark"]`
-- Use `effect()` to sync theme class to the DOM (see `app.ts`)
+- Dark mode applied via `[data-theme="dark"]` on `<html>` using Angular `effect()`
+- `@custom-variant dark` in `styles.css` enables `dark:` prefix for one-off overrides
+- Token variables (e.g. `--color-bg`) change between modes — `bg-bg` automatically reflects the correct mode; `dark:` prefix only needed for overrides not covered by tokens
 
 ## Design System — "Strawberry" Aesthetic
 - Follow the existing warm, fruit-inspired color palette
-- Use CSS variables for all colors — never hardcode hex values in component SCSS
-- Maintain consistent border-radius, spacing, and typography across components
+- Use Tailwind token utilities (`bg-accent`, `text-muted`, `shadow-card`) — never hardcode hex values
+- Token reference: `task-manager-client/src/styles.css` `@theme` block
 
 ## Formatting
 - Prettier: `singleQuote: true`, `printWidth: 100` (configured in `task-manager-client/package.json`)

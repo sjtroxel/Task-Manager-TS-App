@@ -10,22 +10,23 @@ No Tailwind config exists. **This document is a preparation guide — do not beg
 
 ## 1. Angular + Tailwind V4 Integration
 
-Angular 21 uses `@angular/build` which is backed by Vite + esbuild. Tailwind V4 ships a first-class Vite plugin:
+Angular 21 uses `@angular/build` which is backed by Vite + esbuild. The `@angular/build:application` builder does NOT support a `"plugins"` key in `angular.json` — use `@tailwindcss/postcss` instead, which Angular auto-discovers via `postcss.config.mjs`:
 
 ```bash
-npm install -D tailwindcss @tailwindcss/vite
+npm install -D tailwindcss @tailwindcss/postcss
 ```
 
-Then add the plugin to `angular.json` by creating a `vitest.config.ts`-equivalent for the build, **or** use the `vitePlugins` option in Angular's application builder (available in `@angular/build` ≥ 19.1):
+Create `postcss.config.mjs` at the project root:
 
-```json
-// angular.json → architect.build.options
-"plugins": ["tailwindcss"]
+```js
+export default {
+  plugins: { '@tailwindcss/postcss': {} },
+};
 ```
 
-> **Critical**: Tailwind V4 does NOT use PostCSS by default. The `@tailwindcss/vite` plugin replaces the `autoprefixer`/`postcss-tailwindcss` setup from V3. Remove any existing PostCSS config.
+> **Critical**: Do NOT add both `@tailwindcss/postcss` AND `@tailwindcss/vite` — they conflict. For Angular 21, use PostCSS only.
 
-Replace the top of `src/styles.scss` (or switch to `src/styles.css`) with:
+Create `src/styles.css` (new file, added to `angular.json` styles array):
 
 ```css
 @import "tailwindcss";
@@ -140,9 +141,9 @@ Migrate simpler/smaller components first to build confidence:
 
 | Step | Component | SCSS File | Complexity |
 |------|-----------|-----------|------------|
-| 1 | TaskForm | `task-form.scss` (47 lines) | Low — simple form with glassmorphism |
-| 2 | Signup | `signup.scss` (46 lines) | Low — form layout |
-| 3 | Login | `login.scss` (91 lines) | Medium — tabs, form, foldout |
+| 1 | TaskForm ✅ | `task-form.scss` (47 lines) | Low — simple form with glassmorphism |
+| 2 | Signup ✅ | `signup.scss` (46 lines) | Low — form layout |
+| 3 | Login ✅ | `login.scss` (91 lines) | Medium — tabs, form, foldout |
 | 4 | Profile | `profile.scss` (71 lines) | Medium — card layout, dividers |
 | 5 | TaskList | `task-list.scss` (87 lines) | Medium — CSS Grid, task cards |
 | 6 | Home | `home.scss` (124 lines) | High — animations, gradient text, floating cards |

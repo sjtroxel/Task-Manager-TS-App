@@ -1,38 +1,52 @@
-<div class="dashboard">
-  <div class="header">
-    <h2>{{ authService.currentUser()?.name || 'My' }}'s Tasks! 🍓</h2>
-    <button class="logout-btn" (click)="onLogout()">Logout</button>
-  </div>
-
-  <app-task-form />
-  <hr>
-
-  @if (taskService.tasks().length ===0) {
-    <p>No tasks found. Time for a nap?!</p>
-  } @else {
-    <div class="task-grid">
-      @for (task of taskService.tasks(); track task._id) {
-        <div class="task-card" [class.completed]="task.completed">
-          @if (editingTaskId() === task._id) {
-        <input [(ngModel)]="editTitle" class="edit-input">
-        <textarea [(ngModel)]="editDescription" class="edit-input"></textarea>
-
-        <div class="actions">
-          <button (click)="saveEdit(task)" class="save">Save</button>
-          <button (click)="cancelEdit()" class="cancel">Cancel</button>
-        </div>
-      } @else {
-            <h3>{{ task.title }}</h3>
-            <p>{{ task.description }}</p>
-
-            <div class="actions">
-              <button (click)="onToggle(task)">{{ task.completed ? 'Undo' : 'Done' }}</button>
-              <button (click)="startEdit(task)">Edit</button>
-              <button class="delete" (click)="onDelete(task._id)">Delete</button>
-            </div>
-          }
-        </div>
-      }
-    </div>
-  }
+<div class="flex justify-between items-center mb-8">
+  <h2 class="m-0 text-accent text-[1.8rem]">{{ authService.currentUser()?.name || 'My' }}'s Tasks! 🍓</h2>
+  <button
+    class="bg-transparent border border-danger text-danger px-4 py-2 rounded-lg cursor-pointer font-bold transition duration-200 hover:bg-danger hover:text-white"
+    (click)="onLogout()">Logout</button>
 </div>
+
+<app-task-form />
+<hr class="my-4 border-accent-2/30">
+
+@if (taskService.tasks().length === 0) {
+  <p>No tasks found. Time for a nap?!</p>
+} @else {
+  <div class="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-6">
+    @for (task of taskService.tasks(); track task._id) {
+      <div class="group p-6 rounded-2xl shadow-card transition-all duration-300 flex flex-col justify-between hover:-translate-y-1.25"
+           [class.completed]="task.completed"
+           [ngClass]="task.completed
+             ? 'bg-success/5 border border-success'
+             : 'bg-card border border-accent-2 hover:border-accent'">
+
+        @if (editingTaskId() === task._id) {
+          <input [(ngModel)]="editTitle" class="mb-2">
+          <textarea [(ngModel)]="editDescription" class="mb-2"></textarea>
+          <div class="flex gap-2 mt-6">
+            <button
+              class="flex-1 p-2 rounded-md border border-accent-2 bg-bg text-text cursor-pointer font-sans font-semibold transition duration-200 hover:bg-glass hover:border-accent"
+              (click)="saveEdit(task)">Save</button>
+            <button
+              class="flex-1 p-2 rounded-md border border-accent-2 bg-bg text-text cursor-pointer font-sans font-semibold transition duration-200 hover:bg-glass hover:border-accent"
+              (click)="cancelEdit()">Cancel</button>
+          </div>
+        } @else {
+          <h3 class="m-0 mb-2 text-accent text-xl group-[.completed]:line-through group-[.completed]:text-muted">{{ task.title }}</h3>
+          <p class="text-text leading-[1.4] m-0 grow">{{ task.description }}</p>
+          <div class="flex gap-2 mt-6">
+            <button
+              class="flex-1 p-2 rounded-md border border-accent-2 bg-bg text-text cursor-pointer font-sans font-semibold transition duration-200 hover:bg-glass hover:border-accent"
+              (click)="onToggle(task)">{{ task.completed ? 'Undo' : 'Done' }}</button>
+            <button
+              class="flex-1 p-2 rounded-md border border-accent-2 bg-bg text-text cursor-pointer font-sans font-semibold transition duration-200 hover:bg-glass hover:border-accent"
+              (click)="startEdit(task)">Edit</button>
+            <button
+              class="flex-1 p-2 rounded-md border border-danger bg-bg text-danger cursor-pointer font-sans font-semibold transition duration-200 hover:bg-danger hover:text-white"
+              (click)="onDelete(task._id)">Delete</button>
+          </div>
+        }
+
+      </div>
+    }
+  </div>
+}

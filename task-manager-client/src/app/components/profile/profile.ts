@@ -9,7 +9,7 @@ import { LucideAngularModule } from 'lucide-angular';
   selector: 'app-profile',
   imports: [CommonModule, FormsModule, LucideAngularModule],
   templateUrl: './profile.html',
-  styleUrl: './profile.scss',
+  host: { class: 'flex justify-center pt-8' },
 })
 
 export class ProfileComponent {

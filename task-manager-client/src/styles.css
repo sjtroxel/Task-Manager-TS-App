@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors — light mode defaults */
+  --color-bg: #f0f8ff;
+  --color-card: #ffffff;
+  --color-text: #001f3f;
+  --color-muted: #4682b4;
+  --color-accent: #00d4ff;
+  --color-accent-2: #0077be;
+  --color-danger: #ff4757;
+  --color-nav: #e1eef6;
+  --color-glass: rgba(255, 255, 255, 0.7);
+  --color-success: #2ecc71;
+
+  /* Typography */
+  --font-sans: 'Nunito', sans-serif;
+
+  /* Shadows */
+  --shadow-card: 0 4px 20px rgba(0, 119, 190, 0.1);
+
+  /* Animation */
+  --animate-float: float 6s ease-in-out infinite;
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotateX(5deg) rotateY(-5deg); }
+    50% { transform: translateY(-20px) rotateX(10deg) rotateY(5deg); }
+  }
+}
+
+/* Dark mode variant — matches Angular's data-theme toggle in app.ts */
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@layer components {
+  /* Auth tab buttons — active indicator uses border-bottom which conflicts with
+     Tailwind's border-none utility, so base + active styles live here together */
+  .auth-tab-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--color-muted);
+    transition: all 0.3s;
+  }
+  .auth-tab-btn.active {
+    color: var(--color-accent);
+    border-bottom: 3px solid var(--color-accent);
+    margin-bottom: -2px;
+  }
+}
+
+/* Dark mode token overrides */
+[data-theme='dark'] {
+  --color-bg: #050101;
+  --color-card: #120101;
+  --color-text: #ffffff;
+  --color-muted: #ffb7c5;
+  --color-accent: #ff007f;
+  --color-accent-2: #bc13fe;
+  --color-danger: #ff3131;
+  --color-nav: #1a0101;
+  --color-glass: rgba(18, 1, 1, 0.8);
+  --shadow-card: 0 4px 30px rgba(255, 0, 127, 0.3);
+}

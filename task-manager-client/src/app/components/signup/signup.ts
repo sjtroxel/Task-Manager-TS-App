@@ -8,7 +8,7 @@ import { LucideAngularModule } from 'lucide-angular';
   selector: 'app-signup',
   imports: [FormsModule, LucideAngularModule],
   templateUrl: './signup.html',
-  styleUrl: './signup.scss',
+  host: { class: 'block w-full' },
 })
 
 export class SignupComponent {

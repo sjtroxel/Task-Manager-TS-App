@@ -11,7 +11,6 @@ import { LucideAngularModule } from 'lucide-angular';
   // standalone: true,        // this is actually not required anymore despite all the LLMs including it
   imports: [FormsModule, CommonModule, SignupComponent, LucideAngularModule],
   templateUrl: './login.html',
-  styleUrl: './login.scss',
 })
 
 export class LoginComponent implements OnInit {

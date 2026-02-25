@@ -1,52 +1,55 @@
-<div class="profile-container">
-  <div class="profile-card">
-    <div class="card-header">
-      <h2>Account Settings</h2>
-      <button class="logout-btn" (click)="onLogout()">Logout</button>
-    </div>
-
-    <p class="subtitle">Keep your info fresh and secure.</p>
-
-    <div class="form-group">
-      <label for="profile-name">Display Name</label>
-      <input id="profile-name" type="text" [ngModel]="newName()" (ngModelChange)="newName.set($event)">
-    </div>
-
-    <div class="form-group">
-      <label for="profile-email">Email Address</label>
-      <input id="profile-email" type="email" [value]="authService.currentUser()?.email" disabled>
-    </div>
-
-    <hr class="divider">
-
-    <div class="form-group">
-      <label for="profile-new-password">New Password (leave blank to keep current)</label>
-      <div class="input-with-eye">
-        <input id="profile-new-password" [type]="showNewPass() ? 'text' : 'password'" [(ngModel)]="newPassword">
-        <button type="button" (click)="showNewPass.set(!showNewPass())" class="eye-btn">
-          <lucide-icon [name]="showNewPass() ? 'eye-off' : 'eye'"></lucide-icon>
-        </button>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label>Confirm New Password</label>
-      <div class="input-with-eye">
-        <input [type]="showConfirmPass() ? 'text' : 'password'" [(ngModel)]="confirmPassword">
-        <button type="button" (click)="showConfirmPass.set(!showConfirmPass())" class="eye-btn">
-          <lucide-icon [name]="showConfirmPass() ? 'eye-off' : 'eye'"></lucide-icon>
-        </button>
-      </div>
-    </div>
-
-    @if (message()) {
-      <div class="status-message" [class.success]="message().includes('successfully')">
-        {{ message() }}
-      </div>
-    }
-
-    <button class="btn-primary" (click)="updateProfile()">
-      Save All Changes
-    </button>
+<div class="bg-card border border-accent-2 rounded-[20px] shadow-card w-full max-w-125 p-10">
+  <div class="flex justify-between items-center mb-2">
+    <h2 class="m-0 text-accent text-[1.8rem]">Account Settings</h2>
+    <button
+      class="bg-transparent border border-danger text-danger px-3 py-1.5 rounded-lg cursor-pointer font-bold transition duration-200 hover:bg-danger hover:text-white"
+      (click)="onLogout()">Logout</button>
   </div>
+
+  <p class="text-muted mb-8">Keep your info fresh and secure.</p>
+
+  <div class="form-group">
+    <label for="profile-name">Display Name</label>
+    <input id="profile-name" type="text" [ngModel]="newName()" (ngModelChange)="newName.set($event)">
+  </div>
+
+  <div class="form-group">
+    <label for="profile-email">Email Address</label>
+    <input id="profile-email" type="email" [value]="authService.currentUser()?.email" disabled>
+  </div>
+
+  <hr class="border-0 border-t border-accent-2/30 my-8">
+
+  <div class="form-group">
+    <label for="profile-new-password">New Password (leave blank to keep current)</label>
+    <div class="input-with-eye">
+      <input id="profile-new-password" [type]="showNewPass() ? 'text' : 'password'" [(ngModel)]="newPassword">
+      <button type="button" (click)="showNewPass.set(!showNewPass())" class="eye-btn">
+        <lucide-icon [name]="showNewPass() ? 'eye-off' : 'eye'"></lucide-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Confirm New Password</label>
+    <div class="input-with-eye">
+      <input [type]="showConfirmPass() ? 'text' : 'password'" [(ngModel)]="confirmPassword">
+      <button type="button" (click)="showConfirmPass.set(!showConfirmPass())" class="eye-btn">
+        <lucide-icon [name]="showConfirmPass() ? 'eye-off' : 'eye'"></lucide-icon>
+      </button>
+    </div>
+  </div>
+
+  @if (message()) {
+    <div class="p-2.5 rounded-lg mb-4 font-semibold text-center"
+         [ngClass]="message().includes('successfully') ? 'bg-accent/10 text-accent' : 'bg-danger/10 text-danger'">
+      {{ message() }}
+    </div>
+  }
+
+  <button
+    class="w-full bg-accent text-white p-3.5 border-0 rounded-xl font-bold cursor-pointer font-sans transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:shadow-[0_5px_15px_var(--color-accent)]"
+    (click)="updateProfile()">
+    Save All Changes
+  </button>
 </div>

@@ -10,7 +10,7 @@ import { AuthService } from '../../services/auth.service';
   selector: 'app-task-list',
   imports: [CommonModule, TaskForm, FormsModule],
   templateUrl: './task-list.html',
-  styleUrl: './task-list.scss',
+  host: { class: 'block max-w-[1100px] mx-auto' },
 })
 
 export class TaskListComponent implements OnInit {
