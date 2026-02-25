@@ -1,23 +1,20 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { signal } from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { TestBed } from '@angular/core/testing';
+import { HomeComponent } from './home';
+import { AuthService } from '../../services/auth.service';
 
-import { Home } from './home';
-
-describe('Home', () => {
-  let component: Home;
-  let fixture: ComponentFixture<Home>;
-
-  beforeEach(async () => {
+describe('HomeComponent', () => {
+  it('should create', async () => {
     await TestBed.configureTestingModule({
-      imports: [Home]
-    })
-    .compileComponents();
+      imports: [HomeComponent],
+      providers: [
+        { provide: AuthService, useValue: { currentUser: signal(null) } },
+        provideRouter([]),
+      ],
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(Home);
-    component = fixture.componentInstance;
-    await fixture.whenStable();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
+    const fixture = TestBed.createComponent(HomeComponent);
+    expect(fixture.componentInstance).toBeTruthy();
   });
 });

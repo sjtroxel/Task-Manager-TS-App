@@ -1,17 +1,44 @@
+import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { HttpInterceptorFn } from '@angular/common/http';
-
 import { authInterceptor } from './auth-interceptor';
 
 describe('authInterceptor', () => {
-  const interceptor: HttpInterceptorFn = (req, next) => 
-    TestBed.runInInjectionContext(() => authInterceptor(req, next));
+  let http: HttpClient;
+  let httpMock: HttpTestingController;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    localStorage.clear();
+    TestBed.configureTestingModule({
+      providers: [
+        provideHttpClient(withInterceptors([authInterceptor])),
+        provideHttpClientTesting(),
+      ],
+    });
+    http = TestBed.inject(HttpClient);
+    httpMock = TestBed.inject(HttpTestingController);
   });
 
-  it('should be created', () => {
-    expect(interceptor).toBeTruthy();
+  afterEach(() => {
+    httpMock.verify();
+    localStorage.clear();
+  });
+
+  it('adds an Authorization header when a token is present in localStorage', () => {
+    localStorage.setItem('token', 'test-jwt-token');
+
+    http.get('/api/tasks').subscribe();
+
+    const req = httpMock.expectOne('/api/tasks');
+    expect(req.request.headers.get('Authorization')).toBe('Bearer test-jwt-token');
+    req.flush([]);
+  });
+
+  it('does not add an Authorization header when no token is in localStorage', () => {
+    http.get('/api/tasks').subscribe();
+
+    const req = httpMock.expectOne('/api/tasks');
+    expect(req.request.headers.has('Authorization')).toBe(false);
+    req.flush([]);
   });
 });
