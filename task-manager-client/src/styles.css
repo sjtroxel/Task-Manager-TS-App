@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* Tell Tailwind where to scan for utility classes.
+   Required because Angular's esbuild pipeline sets CWD to workspace root
+   but the @tailwindcss/postcss plugin resolves @source relative to this file. */
+@source ".";
+
 @theme {
   /* Colors — light mode defaults */
   --color-bg: #f0f8ff;

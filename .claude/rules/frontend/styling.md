@@ -6,11 +6,16 @@ paths:
 # Styling Rules
 
 ## Technology
-- **Tailwind V4** via `@tailwindcss/vite` (Vite plugin — no PostCSS config file)
+- **Tailwind V4** via `@tailwindcss/postcss` (PostCSS plugin)
 - CSS custom properties defined in `@theme` block in `src/styles.css`
-- Do NOT create new `.scss` files for new components — use Tailwind utilities in templates
-- **Migration in progress**: un-migrated components still have `.scss` files; `styles.scss` coexists with `styles.css` temporarily
-- See `project-specs/04-tailwind-migration-implementation.md` for migration order and token reference
+- Do NOT create new `.scss` files — use Tailwind utilities in templates. Migration complete.
+- See `project-specs/04-tailwind-migration-implementation.md` for migration history and token reference
+
+## PostCSS Configuration — CRITICAL
+- **`postcss.config.json`** (JSON format) is required in `task-manager-client/` — Angular's `@angular/build:application` ONLY reads JSON PostCSS config (`postcss.config.json` or `.postcssrc.json`)
+- **`postcss.config.mjs`** is also kept for the Vitest/Vite test runner (uses postcss-load-config, reads .mjs)
+- Do NOT delete `postcss.config.json` — without it, Tailwind generates zero utility classes and the app is completely unstyled
+- `@source "."` in `src/styles.css` helps with source scanning in the Angular build context
 
 ## Theming
 - Light/dark mode toggle via `isDarkMode` signal in root `app.ts`
