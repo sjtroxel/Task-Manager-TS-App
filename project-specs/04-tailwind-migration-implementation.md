@@ -1,6 +1,6 @@
 # 04 — Tailwind V4 Migration Implementation
 
-## Status: In Progress — 5 of 8 component steps complete
+## Status: ✅ Complete — all 8 steps done
 
 ## Context
 
@@ -76,9 +76,9 @@ Simpler/smaller components first to build confidence:
 | 3 | Login | `login.scss` | 91 | ✅ **Done** |
 | 4 | Profile | `profile.scss` | 71 | ✅ **Done** |
 | 5 | TaskList | `task-list.scss` | 87 | ✅ **Done** |
-| 6 | Home | `home.scss` | 124 | ⬜ Pending |
-| 7 | Root layout | `app.scss` | 130 | ⬜ Pending |
-| 8 | Global | `styles.scss` | 109 | ⬜ Pending (last — also merges remaining CSS) |
+| 6 | Home | `home.scss` | 124 | ✅ **Done** |
+| 7 | Root layout | `app.scss` | 130 | ✅ **Done** |
+| 8 | Global | `styles.scss` | 109 | ✅ **Done** |
 
 **Protocol for each step:**
 1. Run `npm test` (baseline — confirm all 50 tests pass)
@@ -197,39 +197,83 @@ Key translations:
 
 ---
 
-### Step 6: Home (Next Session)
+### Step 6: Home ✅
 
 **`home.scss`** (124 lines) — most complex: animations, gradient text, `clamp()`, floating card
 
 Key translations:
-- `.gradient-text` → `bg-gradient-to-r from-accent to-accent-2 bg-clip-text text-transparent`
-- `.floating-card` → `backdrop-blur-[15px] bg-white/20 border border-white/20 rounded-3xl animate-float`
-- `.main-title` → `text-[clamp(2.5rem,8vw,4rem)] font-bold leading-tight`
-- `@keyframes float` → already in `@theme` in `styles.css`
+- `.hero-wrapper` → lifted to `host: { class: '...' }` in decorator; outer div removed
+  - `flex flex-col items-center justify-center text-center min-h-[80vh] p-8 gap-16 lg:flex-row lg:text-left lg:justify-between lg:max-w-[1200px] lg:mx-auto`
+- `.hero-content` → `flex-1 max-w-150` (canonical `max-w-150` = 600px)
+- `.badge` → `inline-block px-3 py-1.5 bg-nav border border-accent-2 rounded-full text-[0.8rem] font-bold text-accent mb-6`
+- `.main-title` → `text-[clamp(2.5rem,8vw,4rem)] leading-[1.1] mb-6 text-text`
+- `.gradient-text` → `bg-linear-to-r from-accent to-accent-2 bg-clip-text text-transparent`
+  - **V4 IMPORTANT**: Tailwind V4 canonical is `bg-linear-to-r`, NOT `bg-gradient-to-r` (v3 name)
+- `.lead-text` → `text-[1.2rem] text-muted mb-10`
+- `.cta-group` → `flex flex-col gap-4 sm:flex-row`
+- `.btn-primary-lg` → `bg-accent text-white px-8 py-4 rounded-xl font-bold text-base cursor-pointer font-sans border-0 shadow-card transition-all duration-300 hover:-translate-y-1 hover:brightness-110`
+- `.btn-secondary-lg` → `bg-transparent text-text border-2 border-solid border-accent-2 px-8 py-4 rounded-xl font-bold text-base cursor-pointer font-sans transition-all duration-300 hover:bg-glass`
+  - Note: `border-solid` added explicitly since `border-2` alone doesn't set border-style
+- `.hero-visual` → `flex-1 flex justify-center perspective-[1000px]`
+- `.floating-card` → `w-70 h-45 bg-glass backdrop-blur-[15px] border border-white/20 rounded-3xl p-5 shadow-card animate-float`
+  - `rounded-[24px]` → canonical `rounded-3xl` (= 1.5rem = 24px)
+- `.card-header` dots → `w-3 h-3 rounded-full bg-accent-2 opacity-50`
+- `.skeleton-line` → `h-2.5 bg-muted opacity-20 rounded-[5px] mb-3`; `.long` → `w-[80%]`; `.short` → `w-[40%]`
+- `@keyframes float` → already in `@theme`; added explicit `@layer utilities { .animate-float { animation: var(--animate-float); } }` to `styles.css`
 
 ---
 
-### Step 7: Root Layout / App (Next Session)
+### Step 7: Root Layout / App ✅
 
 **`app.scss`** (130 lines) — sidebar toggle animation, `:host`, theme toggle button
 
-Key considerations:
-- Sidebar width transition: `transition-[width] duration-350 ease-[cubic-bezier(0.4,0,0.2,1)]` (arbitrary easing)
-- `:host { display: block }` → ViewEncapsulation concern — test if Tailwind classes on `:host` work, or add to root element
+Key translations:
+- `:host` → `host: { class: 'flex w-screen h-screen overflow-hidden bg-bg' }` in decorator; wrapper `.app-container` div removed (host is the flex container)
+- `.sidebar` (condensed) → `[ngClass]` ternary: `'w-17.5 items-center'` vs `'w-65 items-start px-3'`
+- `.sidebar` base → `flex flex-col z-100 py-4 transition-all duration-350 ease-in-out border-r border-accent-2 shadow-card bg-nav`
+  - Canonicals: `w-17.5` (70px), `w-65` (260px), `z-100`, `duration-350`, `ease-in-out` (= cubic-bezier(0.4,0,0.2,1))
+- `.sidebar-header` → `[ngClass]` ternary: `'justify-start'` vs `'justify-center'`; base: `w-full flex items-center gap-4 mb-8`
+- `.logo-text` → `font-bold text-[1.2rem] whitespace-nowrap text-accent-2 dark:text-accent dark:shadow-[0_0_15px_var(--color-accent)]`
+- `.logo-link` → `no-underline text-inherit cursor-pointer transition-opacity duration-200 hover:opacity-80`
+- `.nav-links` → `flex flex-col gap-2 w-full`
+- `.nav-item` (links) → `[ngClass]` ternary for justify; base: `flex items-center gap-4 p-3 text-text no-underline rounded-xl transition-all duration-200 whitespace-nowrap hover:bg-accent hover:text-white [&.active]:bg-accent [&.active]:text-white`
+- `.theme-toggle-item` → `[ngClass]` ternary for justify; base: `flex items-center gap-4 px-3 pb-3 pt-6 text-text bg-transparent border-0 border-solid border-t border-accent-2 cursor-pointer w-full mt-4 rounded-xl transition-all duration-200 whitespace-nowrap hover:bg-accent hover:text-white`
+  - Note: `border-0 border-solid border-t` pattern — `border-0` zeros all widths, `border-solid` sets style, `border-t` restores top to 1px; this reliably renders only a top border on a `<button>` element
+- `.icon-btn` → `bg-transparent border-none text-text cursor-pointer p-2 rounded-full flex items-center justify-center hover:bg-glass`
+- `.content` → `flex-1 overflow-y-auto p-8 bg-bg transition-colors duration-400`
 
 ---
 
-### Step 8: Global Styles (Last)
+### Step 8: Global Styles ✅
 
-**`styles.scss`** — merge remaining content into `styles.css`:
+**`styles.scss`** — merged into `styles.css`, then deleted:
 
-1. Move `:root` CSS variables into the existing `@theme` block (replace the old names)
-2. Keep `[data-theme='dark']` overrides (already in `styles.css`)
-3. Move global `input` and `textarea` styles into a `@layer base` block in `styles.css`
-4. Move `.form-group` and `.input-with-eye` into `@layer components` or inline on the relevant components
-5. Delete `styles.scss`
-6. Update `angular.json` styles to just `["src/styles.css"]`
-7. Change `inlineStyleLanguage` from `"scss"` to `"css"` in `angular.json` (no more SCSS needed)
+**Variable harmonization** — all old `:root` vars replaced with `@theme` tokens:
+- `var(--bg-color)` → `var(--color-bg)`, `var(--text-main)` → `var(--color-text)`, etc.
+- `font-family: 'Nunito', sans-serif` → `font-family: var(--font-sans)`
+- The `[data-theme='dark']` block was already in `styles.css`; the `:root` block was dropped entirely.
+
+**`@layer base` additions** (body + default inputs):
+- `body` → `margin/padding: 0; background-color: var(--color-bg); color: var(--color-text); font-family: var(--font-sans); transition: background-color 0.4s, color 0.4s`
+- `input:not([type='checkbox']), textarea` → base border/bg/color/font
+- `input:not([type='checkbox']):focus, textarea:focus` → `border-color: var(--color-accent); box-shadow: 0 0 8px var(--color-accent)`
+
+**`@layer components` additions** (flattened from SCSS nesting):
+- `.form-group` → `margin-bottom: 1.2rem`
+- `.form-group label` → `display: block; font-weight: 600; color: var(--color-text)`
+- `.input-with-eye` → `position: relative; display: flex; align-items: center`
+- `.input-with-eye input` → `padding-right: 45px` (eyeball clearance) + full border/bg/color
+- `.input-with-eye input:focus` → same focus ring as default inputs
+- `.eye-btn` → `position: absolute; right: 8px; color: var(--color-muted); cursor: pointer`
+- `.eye-btn:hover` → `color: var(--color-accent)`
+- `.eye-btn lucide-icon` → `width: 20px; height: 20px`
+
+**`angular.json` changes:**
+- `styles` array: removed `"src/styles.scss"` — only `"src/styles.css"` remains
+- `inlineStyleLanguage`: `"scss"` → `"css"`
+- `schematics/@schematics/angular:component.style`: `"scss"` → `"css"` (new components default to CSS)
+
+**Result:** Zero SCSS files in the project. Build output: `styles.css` 23.73kB, 50/50 tests passing.
 
 ---
 

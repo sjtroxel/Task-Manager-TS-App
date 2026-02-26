@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [RouterOutlet, RouterLink, LucideAngularModule, CommonModule],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  host: { class: 'flex w-screen h-screen overflow-hidden bg-bg' },
 })
 export class App {
   isSidebarOpen = signal(false);

@@ -1,38 +1,51 @@
-<div class="app-container" [class.open]="isSidebarOpen()">
+<aside
+  [ngClass]="isSidebarOpen() ? 'w-65 items-start px-3' : 'w-17.5 items-center'"
+  class="flex flex-col z-100 py-4 transition-all duration-350 ease-in-out border-r border-accent-2 shadow-card bg-nav">
 
-  <aside class="sidebar" [class.expanded]="isSidebarOpen()">
-    <div class="sidebar-header">
-      <button (click)="toggleSidebar()" class="icon-btn" title="Toggle Menu">
-        <lucide-icon name="menu"></lucide-icon>
-      </button>
+  <div
+    [ngClass]="isSidebarOpen() ? 'justify-start' : 'justify-center'"
+    class="w-full flex items-center gap-4 mb-8">
+    <button
+      (click)="toggleSidebar()" title="Toggle Menu"
+      class="bg-transparent border-none text-text cursor-pointer p-2 rounded-full flex items-center justify-center hover:bg-glass">
+      <lucide-icon name="menu"></lucide-icon>
+    </button>
+    @if (isSidebarOpen()) {
+      <a routerLink="/" class="no-underline text-inherit cursor-pointer transition-opacity duration-200 hover:opacity-80">
+        <span class="font-bold text-[1.2rem] whitespace-nowrap text-accent-2 dark:text-accent dark:shadow-[0_0_15px_var(--color-accent)]">Strawberry Tasks</span>
+      </a>
+    }
+  </div>
+
+  <nav class="flex flex-col gap-2 w-full">
+    <a
+      routerLink="/tasks" routerLinkActive="active"
+      [ngClass]="isSidebarOpen() ? 'justify-start' : 'justify-center'"
+      class="flex items-center gap-4 p-3 text-text no-underline rounded-xl transition-all duration-200 whitespace-nowrap hover:bg-accent hover:text-white [&.active]:bg-accent [&.active]:text-white">
+      <lucide-icon name="list-todo"></lucide-icon>
+      @if (isSidebarOpen()) { <span>Tasks</span> }
+    </a>
+    <a
+      routerLink="/profile" routerLinkActive="active"
+      [ngClass]="isSidebarOpen() ? 'justify-start' : 'justify-center'"
+      class="flex items-center gap-4 p-3 text-text no-underline rounded-xl transition-all duration-200 whitespace-nowrap hover:bg-accent hover:text-white [&.active]:bg-accent [&.active]:text-white">
+      <lucide-icon name="user"></lucide-icon>
+      @if (isSidebarOpen()) { <span>Profile</span> }
+    </a>
+
+    <button
+      (click)="toggleTheme()"
+      [ngClass]="isSidebarOpen() ? 'justify-start' : 'justify-center'"
+      class="flex items-center gap-4 px-3 pb-3 pt-6 text-text bg-transparent border-0 border-solid border-t border-accent-2 cursor-pointer w-full mt-4 rounded-xl transition-all duration-200 whitespace-nowrap hover:bg-accent hover:text-white">
+      <lucide-icon [name]="isDarkMode() ? 'sun' : 'moon'"></lucide-icon>
       @if (isSidebarOpen()) {
-        <a routerLink="/" class="logo-link">
-          <span class="logo-text">Strawberry Tasks</span>
-        </a>
+        <span>{{ isDarkMode() ? 'Light Mode' : 'Dark Mode' }}</span>
       }
-    </div>
+    </button>
+  </nav>
 
-    <nav class="nav-links">
-      <a routerLink="/tasks" routerLinkActive="active" class="nav-item">
-        <lucide-icon name="list-todo"></lucide-icon>
-        @if (isSidebarOpen()) { <span>Tasks</span> }
-      </a>
-      <a routerLink="/profile" routerLinkActive="active" class="nav-item">
-        <lucide-icon name="user"></lucide-icon>
-        @if (isSidebarOpen()) { <span>Profile</span> }
-      </a>
+</aside>
 
-      <button (click)="toggleTheme()" class="nav-item theme-toggle-item">
-        <lucide-icon [name]="isDarkMode() ? 'sun' : 'moon'"></lucide-icon>
-        @if (isSidebarOpen()) {
-          <span>{{ isDarkMode() ? 'Light Mode' : 'Dark Mode' }}</span>
-        }
-      </button>
-    </nav>
-  </aside>
-
-  <main class="content">
-    <router-outlet></router-outlet>
-  </main>
-
-</div>
+<main class="flex-1 overflow-y-auto p-8 bg-bg transition-colors duration-400">
+  <router-outlet></router-outlet>
+</main>

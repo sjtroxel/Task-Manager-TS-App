@@ -30,6 +30,58 @@
 /* Dark mode variant — matches Angular's data-theme toggle in app.ts */
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
+/* Dark mode token overrides */
+[data-theme='dark'] {
+  --color-bg: #050101;
+  --color-card: #120101;
+  --color-text: #ffffff;
+  --color-muted: #ffb7c5;
+  --color-accent: #ff007f;
+  --color-accent-2: #bc13fe;
+  --color-danger: #ff3131;
+  --color-nav: #1a0101;
+  --color-glass: rgba(18, 1, 1, 0.8);
+  --shadow-card: 0 4px 30px rgba(255, 0, 127, 0.3);
+}
+
+@layer base {
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+
+  input:not([type='checkbox']),
+  textarea {
+    width: 100%;
+    padding: 12px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-accent-2);
+    border-radius: 8px;
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    box-sizing: border-box;
+  }
+
+  input:not([type='checkbox']):focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 8px var(--color-accent);
+  }
+}
+
+@layer utilities {
+  /* Explicit animation utility — @theme already generates animate-float from
+     --animate-float, but this makes the intent visible and allows overrides */
+  .animate-float {
+    animation: var(--animate-float);
+  }
+}
+
 @layer components {
   /* Auth tab buttons — active indicator uses border-bottom which conflicts with
      Tailwind's border-none utility, so base + active styles live here together */
@@ -48,18 +100,61 @@
     border-bottom: 3px solid var(--color-accent);
     margin-bottom: -2px;
   }
-}
 
-/* Dark mode token overrides */
-[data-theme='dark'] {
-  --color-bg: #050101;
-  --color-card: #120101;
-  --color-text: #ffffff;
-  --color-muted: #ffb7c5;
-  --color-accent: #ff007f;
-  --color-accent-2: #bc13fe;
-  --color-danger: #ff3131;
-  --color-nav: #1a0101;
-  --color-glass: rgba(18, 1, 1, 0.8);
-  --shadow-card: 0 4px 30px rgba(255, 0, 127, 0.3);
+  /* Global form group — used by login, signup, profile */
+  .form-group {
+    margin-bottom: 1.2rem;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  /* Password field with visibility toggle */
+  .input-with-eye {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .input-with-eye input {
+    width: 100%;
+    padding: 12px;
+    padding-right: 45px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-accent-2);
+    border-radius: 8px;
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    transition: all 0.2s;
+  }
+
+  .input-with-eye input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 8px var(--color-accent);
+  }
+
+  .eye-btn {
+    position: absolute;
+    right: 8px;
+    background: none;
+    border: none;
+    color: var(--color-muted);
+    cursor: pointer;
+    display: flex;
+    padding: 5px;
+  }
+
+  .eye-btn:hover {
+    color: var(--color-accent);
+  }
+
+  .eye-btn lucide-icon {
+    width: 20px;
+    height: 20px;
+  }
 }

@@ -6,7 +6,9 @@ import { AuthService } from '../../services/auth.service';
   selector: 'app-home',
   imports: [RouterModule],
   templateUrl: './home.html',
-  styleUrl: './home.scss',
+  host: {
+    class: 'flex flex-col items-center justify-center text-center min-h-[80vh] p-8 gap-16 lg:flex-row lg:text-left lg:justify-between lg:max-w-[1200px] lg:mx-auto',
+  },
 })
 
 export class HomeComponent {
